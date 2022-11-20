@@ -1,0 +1,70 @@
+<mvc:View
+	controllerName="stock.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:wt="stock.control">
+	<Page
+		title="{i18n>detailPageTitle}"
+		showNavButton="true"
+		navButtonPress=".onNavBack">
+		<ObjectHeader
+			responsive="true"
+			fullScreenOptimized="true"
+			number="{
+				parts: [{path: 'products>UnitPrice'}, {path: 'view>/currency'}],
+				type: 'sap.ui.model.type.Currency',
+				formatOptions: {
+					showMeasure: false
+				}
+			}"
+			numberUnit="{view>/currency}"
+			intro="{products>CompanyName}"
+			title="{products>ProductName}">
+			<attributes>
+				<ObjectAttribute title="{i18n>columnUnitsInStock}" text="{products>UnitsInStock}" />
+				<ObjectAttribute title="{i18n>columnExpectedProfit}" text="{products>ExpectedProfit}"/>
+			</attributes>
+				<headerContainer>
+			<IconTabBar
+				id="itb1"
+				selectedKey="key3"
+				upperCase="true"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://hint">
+						<content>
+								<Table
+									id="statusList"
+									items="{status>/}">
+									<columns>
+										<Column width="12em">
+											<Text text="{i18n>columnProductID}" />
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Status" />
+										</Column>
+										<Column minScreenWidth="Desktop" demandPopin="true">
+											<Text text="Date" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem visible="{= ${products>ProductID} === ${status>ProductID} ? true : false }">
+											<cells>
+												<Text text="{status>ProductID}" />
+												<Text text="{status>Status}" />
+												<Text text="{status>created_at}" />
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</headerContainer>
+		</ObjectHeader>																				
+		<wt:ProductRating id="rating" class="sapUiSmallMarginBeginEnd" change=".onRatingChange"/>
+	</Page>
+</mvc:View>

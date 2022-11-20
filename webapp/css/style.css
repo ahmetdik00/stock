@@ -1,0 +1,29 @@
+.myAppDemoWTmyCustomButton.sapMBtn {
+	margin-right: 0.125rem;
+}
+.myAppDemoWTmyCustomText {
+	font-weight: bold;
+}
+/*  ProductRating */
+.myAppDemoWTProductRating {
+	padding: 0.75rem;
+}
+.myAppDemoWTProductRating .sapMRI {
+	vertical-align: initial;
+}
+
+.margin {
+	margin-top: 8rem;
+}
+
+.margin-bottom {
+	margin-bottom: 3rem;
+}
+
+.margin-top {
+	margin-top: 15rem;
+}
+
+.left {
+	margin-left: 60px !important;
+}

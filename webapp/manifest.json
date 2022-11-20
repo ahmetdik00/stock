@@ -1,0 +1,140 @@
+{
+	"_version": "1.1.0",
+    "sap.app": {
+		"id": "stock",
+        "type": "application",
+		"i18n": "i18n/i18n.properties",
+        "title": "{{stockTitle}}",
+        "description": "{{stockDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"users": {
+				"uri": "http://127.0.0.1:3000/users",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"products": {
+				"uri": "http://127.0.0.1:3000/products",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"suppliers": {
+				"uri": "http://127.0.0.1:3000/suppliers",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"categories": {
+				"uri": "http://127.0.0.1:3000/categories",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			},
+			"situations": {
+				"uri": "http://127.0.0.1:3000/status",
+				"type": "JSON",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui5": {
+        "_version": "1.1.0",
+		"rootView": {
+			"viewName": "stock.view.App",
+			"type": "XML",
+			"async": true
+		},
+		"dependencies": {
+			"libs": {
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.m": {}
+			},
+        "minUI5Version": "1.38.1"
+		},
+		"models": {
+		  "i18n": {
+			"type": "sap.ui.model.resource.ResourceModel",
+			"settings": {
+			  "bundleName": "stock.i18n.i18n",
+			  "supportedLocales": [""],
+			  "fallbackLocale": ""
+			}
+		  },
+		  "products": {
+			  "dataSource": "products"
+		  },
+		  "suppliers": {
+			  "dataSource": "suppliers"
+		  },
+		  "categories": {
+			  "dataSource": "categories"
+		  },
+		  "status": {
+			  "dataSource": "situations"
+		  }
+		},
+		"routing": {
+		  "config": {
+			"routerClass": "sap.m.routing.Router",
+			"type": "View",
+			"viewType": "XML",
+			"path": "stock.view",
+			"controlId": "app",
+			"controlAggregation": "pages",
+			"transition": "slide",	
+			"bypassed": {
+				"target": "notFound"
+			}
+		  },
+		  "routes": [
+			{
+			  "pattern": "",
+			  "name": "overview",
+			  "target": "overview"
+			},
+			{
+			  "pattern": "detail/{detailPath}",
+			  "name": "detail",
+			  "target": "detail"
+			}
+		  ],
+		  "targets": {
+			"overview": {
+			  "id": "overview",
+			  "name": "Overview"
+			},
+			"detail": {
+			  "id": "detail",
+			  "name": "Detail"
+			},
+			"notFound": {
+				"id": "notFound",
+				"name": "NotFound",
+				"transition": "show"
+			}	
+		  }
+		},
+        "contentDensities": {
+                "compact": true,
+                "cozy": true
+        },
+		"resources": {
+		  "css": [
+			{
+			  "uri": "css/style.css"
+			}
+		  ]
+		}
+	}
+}

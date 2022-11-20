@@ -1,0 +1,130 @@
+<mvc:View
+   controllerName="stock.controller.ProductList"
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core"
+   xmlns:mvc="sap.ui.core.mvc">
+   <IconTabBar
+		id="idIconTabBar"
+		select="handleIconTabBarSelect"
+		headerBackgroundDesign="Transparent"
+		class="sapUiResponsiveContentPadding sapUiSmallMarginBegin">
+		<items>
+			<IconTabFilter text="Products">
+				<!-- <TileContent footer="Current Quarter" unit="EUR" class="sapUiSmallMargin">
+					<NumericContent scale="M" value="1.96"
+						valueColor="Error" indicator="Up" />
+				</TileContent>
+				<TileContent footer="Current Quarter" unit="EUR" class="sapUiSmallMargin">
+					<NumericContent scale="M" value="1.96"
+						valueColor="Good" indicator="Up" />
+				</TileContent> -->
+				<Table
+					growing="true"
+					growingThreshold="10"
+					growingScrollToLoad="false"
+					mode="SingleSelectLeft"
+					backgroundDesign="Transparent"	
+					id="productList"
+					headerText="{i18n>productListTitle}"
+					class="sapUiResponsiveMargin"
+					width="auto"
+					items="{products>/}" >
+					<headerToolbar>
+						<Toolbar >
+							<Title text="{i18n>productListTitle}"/>
+							<ToolbarSpacer/>
+							<SearchField width="50%" search=".onFilterProducts" placeholder="Product Name "/>
+							<ToolbarSpacer></ToolbarSpacer>
+							<Button icon="sap-icon://arrow-right" type="Reject" tooltip="Product output" press="onOut"/>
+							<Button icon="sap-icon://add" tooltip="New Product" press="onAdd"/>
+							<Button icon="sap-icon://edit" tooltip="Update Product" press="onEdit"/>
+							<Button icon="sap-icon://delete" tooltip="Delete Product" press="onDelete"/>
+							<Button icon="sap-icon://refresh" tooltip="Refresh Products" press="onRefresh"/>
+						</Toolbar>
+					</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>columnProductID}" />
+							</Column>
+							<Column
+								width="10em">
+								<Text text="{i18n>columnProductName}" />
+							</Column>
+							<Column>
+								<Text text="{i18n>columnUnitsInStock}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>columnProductCost}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>columnCostPrice}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>columnSalePrice}"/>
+							</Column>
+							<Column
+								hAlign="End">
+								<Text text="{i18n>columnProfit}"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem
+								type="Navigation"
+								press=".onPress">
+								<cells>
+									<ObjectNumber 
+										number="{products>ProductID}"/>
+									<ObjectIdentifier title="{products>ProductName}"/>
+									<ObjectNumber 
+										number="{= ${products>UnitsInStock} > 0 ? 'In stock('+${products>UnitsInStock}+')' : 'Out of stock('+${products>UnitsInStock}+')' }" 
+										state="{= ${products>UnitsInStock} > 0 ? 'Success' : 'Error' }"/>
+									<ObjectNumber
+										number="{
+											parts: [{path: 'products>ProductCost'}, {path: 'view>/currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{view>/currency}"/>
+									<ObjectNumber
+										number="{
+											parts: [{path: 'products>CostPrice'}, {path: 'view>/currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{view>/currency}"/>
+									<ObjectNumber
+										number="{
+											parts: [{path: 'products>SalePrice'}, {path: 'view>/currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{view>/currency}"/>
+									<ObjectNumber
+										number="{
+											parts: [{path: 'products>ExpectedProfit'}, {path: 'view>/currency'}],
+											type: 'sap.ui.model.type.Currency',
+											formatOptions: {
+												showMeasure: false
+											}
+										}"
+										unit="{view>/currency}"
+										state="{= ${products>ExpectedProfit} > 0 ? 'Success' : 'Error' }"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+			</IconTabFilter>
+			<IconTabFilter text="Chart" >
+				<Title text="Products Chart" />
+				<core:HTML afterRendering="onRenderApex" content="&lt;div id=&quot;chart&quot; &gt;&lt;/div&gt;"></core:HTML>
+				<!-- <Button icon="sap-icon://bar-chart" press="onChart"/> -->
+			</IconTabFilter>
+		</items>
+	</IconTabBar>
+</mvc:View>

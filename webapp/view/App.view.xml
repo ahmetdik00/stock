@@ -1,0 +1,33 @@
+<mvc:View
+    controllerName="stock.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:tnt="sap.tnt"  
+    height="100%">
+       
+    <tnt:ToolHeader
+        visible="{= ${oViewModel>/isLogin} === true}">
+        <Image src="https://sapui5.hana.ondemand.com/test-resources/sap/tnt/images/SAP_Logo.png" class="marginleft"/>
+        <ToolbarSpacer />
+        <Button 
+            icon="sap-icon://person-placeholder" 
+            class="marginright"
+            type="Transparent"
+            text="{= ${oViewModel>/isLogin} === true ? ${oViewModel>/username} : ${i18n>login}}"
+            press="onPressLogin"/>
+    </tnt:ToolHeader>
+    	<IllustratedMessage 
+        visible="{= ${oViewModel>/isLogin} === false}"
+        class="margin-top"
+			title="Products"
+			description="Looking for products, log in now"
+			illustrationSize="{/sSelectedSize}"
+			illustrationType="{/sSelectedType}">
+			<additionalContent>
+				<Button width="10rem" press="onPressLogin" text="Login" type="Emphasized"/>
+			</additionalContent>
+		</IllustratedMessage>   
+    <Shell>
+        <App id="app" visible="{= ${oViewModel>/isLogin} === true}"/>
+    </Shell>
+</mvc:View>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Stock</title>
+	<script
+		id="sap-ui-bootstrap"
+		src="https://sdk.openui5.org/resources/sap-ui-core.js"
+		data-sap-ui-theme="sap_fiori_3"
+		data-sap-ui-libs="sap.m"
+		data-sap-ui-compatVersion="edge"
+		data-sap-ui-async="true"
+		data-sap-ui-oninit="module:stock/test/initMockServer"
+		data-sap-ui-resourceroots='{
+			"stock": "./"
+		}'>
+
+	</script>
+</head>
+<body class="sapUiBody" id="content">
+	<div data-sap-ui-component data-name="stock" data-id="container" data-settings='{"id" : "stock"}'></div>
+</body>
+</html>
